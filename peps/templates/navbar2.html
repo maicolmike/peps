@@ -1,0 +1,36 @@
+{% load static %}
+<!-- poder activar los li -->
+{% url 'login' as login %}
+
+<a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/logoCootep.png' %}" width="250" height="" alt="COOTEP LTDA" title="COOTEP LTDA"></a>
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color:rgb(4,105,4);">
+    
+    <a href="{% url 'index' %}" class="navbar-brand">Inicio</a>
+    
+    <button type="button" name="button" class="navbar-toggler navbar-toogler-right" data-toggle="collapse" data-target="#navb">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    
+
+    <div class="navbar-collapse collapse hide" id="navb">
+
+        <ul class="nav navbar-nav ml-auto">
+
+           {#  {% if user.is_authenticated %}  #}
+
+            <li class="navbar-item">
+                <a href="#" class="nav-link"><span class="fas fa-sign-in-alt"></span> Logout</a>
+            </li>
+
+           {#  {% else %}   #}
+
+            <li class="navbar-item {% if request.path == login %}active {% endif %}">
+                <a href="#" class="nav-link"><span class="fas fa-user"></span> Login</a>
+            </li>
+            
+           {#  {% endif %} #}
+            
+        </ul>
+    </div>
+
+</nav>
