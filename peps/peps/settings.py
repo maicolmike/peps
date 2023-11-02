@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #instaladas por nosotros
     'personas',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'peps.urls'
+
+AUTH_USER_MODEL = 'users.User'
 
 TEMPLATES = [
     {

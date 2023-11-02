@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+
+<div class="container mt-3">
+    <!-- formulario-->
+    <form class="form-signin" action="" method="post">
+        {% csrf_token %}  <!--para que no genere error-->
+        <img class="mb-4" src="{% static 'img/logoCootep.png' %}" alt="" width="300">
+        <h1 class="h3 mb-3 font-weight-normal">Inicio de Sesi&oacute;n App</h1>
+        
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control">
+        </div>
+        
+
+        <!--
+        {% for field in form %}
+        <div class="form-group">
+    
+          {{ field.label_tag }}
+          {{ field }}
+        
+          {% if field.errors %}
+          {{ field.errors }}
+          {% endif %}
+    
+        </div>
+      {% endfor %}
+-->
+        
+        <button type="submit" style="background-color:rgb(4,105,4);" class="w-75 btn btn-lg btn-success" >Iniciar sesi&oacute;n</button>
+        <br><br>
+        <a class="" href="#">Recordar contraseña</a>
+        <br>
+        <br>
+        {% include 'messages.html' %}
+
+        <footer>
+            <br>
+            <br>
+            <div class="container">
+                <div class="row">
+                    <p class="CopyRight text-muted">All Copyright <span id="anio_actual"></span> &copy; COOTEP <br> Diseñado por Ing de sistemas Maicol Yela</p>
+                </div>
+            </div>
+        </footer>  
+
+    </form>
+    <script src="{% static 'js/hora.js' %}"></script>
+ </div>
+
+{% endblock %}
