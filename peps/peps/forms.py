@@ -3,17 +3,17 @@ from django import forms
 from users.models import User
 
 class LoginUser(forms.Form):
-    username = forms.CharField(required=True, min_length=4, max_length=50,
+    username = forms.CharField(required=True, min_length=4, max_length=50,label='Usuario',
                                widget=forms.TextInput(attrs={'class': 'form-control',
                                                              'id': 'username',
                                                              'placeholder': 'Usuario'}))
-    Password = forms.CharField(required=True,label='Contraseña',
+    password = forms.CharField(required=True,label='Contraseña',
                                widget=forms.PasswordInput(attrs={'class': 'form-control',
                                                              'id': 'password',
                                                              'placeholder': 'Password'}))
-
+    
 class RegistroUsuario(forms.Form):
-    username = forms.CharField(required=True, min_length=4, max_length=50,
+    username = forms.CharField(required=True, min_length=4, max_length=50,label='Usuario',
                                widget=forms.TextInput(attrs={'class': 'form-control',
                                                              'id': 'username',
                                                              'placeholder': 'Username'}))
@@ -25,11 +25,11 @@ class RegistroUsuario(forms.Form):
                                widget=forms.PasswordInput(attrs={'class': 'form-control',
                                                              'id': 'password',
                                                              'placeholder': 'Password'}))
-    password2 = forms.CharField(label= 'Confirmar password',
+    '''password2 = forms.CharField(label= 'Confirmar password',
                                 required=True,
                                widget=forms.PasswordInput(attrs={'class': 'form-control',
                                                              'id': 'password',
-                                                             'placeholder': 'Password'}))
+                                                             'placeholder': 'Password'})) '''
     TIPOS_USUARIO = [
         ('', ''),
         (1, 'Administrador'),
@@ -56,11 +56,12 @@ class RegistroUsuario(forms.Form):
         return username
     
     #se sobreescribe el metodo clean solo si debemos validar una condicion que dependa de otra
-    def clean(self):
+    # En esta hacemos que password sea igual que password2
+    '''def clean(self):
         cleaned_data = super().clean()
         
         if cleaned_data.get('password2') != cleaned_data.get('password'):
-            self.add_error('password2', 'Las contraseñas no coinciden')
+            self.add_error('password2', 'Las contraseñas no coinciden')  '''
     
     #Guardar  
     def save(self):

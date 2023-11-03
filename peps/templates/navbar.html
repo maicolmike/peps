@@ -21,19 +21,23 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Crear Pep</a>
       </li>
-   {#   {% if current_user.tipousuario.id ==1 %}  #}
+     {% if user.is_superuser == 1 %}  
       <li class="nav-item">
         <a class="nav-link" href="{{ register }}">Crear usuario</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Listar usuarios</a>
+        <a class="nav-link" href="{{ listarUsuarios }}">Listar usuarios</a>
       </li>
-    {#   {% endif %}  #}
+    {% endif %}
     </ul>
     <!-- Tomar usuario actual-->
     <span class="navbar-light">
-     <!-- <strong>{{ current_user.usuario }} </strong> ( {{ current_user.tipousuario.nombre }} ) -->
-   {#   <h5 style="color:white">{{ current_user.usuario }} ( {{ current_user.tipousuario.nombre }} )</h5>  #}
+     <!-- <strong>{{ user.username }} </strong> ( {{ user.is_superuser }} ) -->
+     {% if user.is_superuser == 1 %}  
+     <h5 style="color:white">{{ user.username }} ( Administrador )</h5>
+     {% else %}
+     <h5 style="color:white">{{ user.username }} ( Cliente )</h5>
+     {% endif %}
     </span>
     <span class="navbar-nav">
       <strong ><a class="nav-link" href="#">Cambiar clave</a></strong>

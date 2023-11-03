@@ -57,6 +57,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'peps.urls'
 
+#configuracion para poder utilziar el abstracUser
 AUTH_USER_MODEL = 'users.User'
 
 TEMPLATES = [

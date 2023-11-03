@@ -14,6 +14,7 @@
         <img class="mb-4" src="{% static 'img/logoCootep.png' %}" alt="" width="300">
         <h1 class="h3 mb-3 font-weight-normal">Inicio de Sesi&oacute;n App</h1>
         
+        <!--
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" name="username" class="form-control">
@@ -23,8 +24,8 @@
             <input type="password" name="password" class="form-control">
         </div>
         
-
-        <!--
+-->
+        
         {% for field in form %}
         <div class="form-group">
     
@@ -37,12 +38,11 @@
     
         </div>
       {% endfor %}
--->
+
         
         <button type="submit" style="background-color:rgb(4,105,4);" class="w-75 btn btn-lg btn-success" >Iniciar sesi&oacute;n</button>
         <br><br>
         <a class="" href="#">Recordar contraseña</a>
-        <br>
         <br>
         {% include 'messages.html' %}
 
