@@ -30,5 +30,5 @@ urlpatterns = [
     path('usuarios/registro',views.register, name='register'),
     path('usuarios/login',views.login_view, name='login'),
     path('usuarios/logout',views.logout_view, name='logout'),
-    path('usuarios/listarUsuarios',views.listarUsuarios, name='listarUsuarios'),
+    path('usuarios/list',views.listarUsuarios, name='listarUsuarios'),
 ]
