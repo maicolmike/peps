@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import login,logout,authenticate
-from django.contrib.auth.decorators import login_required #vista basada en funciones
+from django.contrib.auth.decorators import login_required # vista basada en funciones que no permita acceder a paginas donde no se ha logeado
 
 from .forms import LoginUser,RegistroUsuario
 from users.models import User
@@ -31,8 +31,8 @@ def login_view(request):
             login(request, user)
             messages.success(request,'Bienvenido {}'.format(user.username))
             
-            if request.GET.get('next'):
-                return HttpResponseRedirect(request.GET['next'])
+            '''if request.GET.get('next'):
+                return HttpResponseRedirect(request.GET['next'])  '''
             return redirect('index')
         else : 
             messages.error(request,'Usuario o contraseña incorrectos')
@@ -42,7 +42,7 @@ def login_view(request):
         'form': form
     })
 
-
+@login_required(login_url='login') 
 def logout_view(request):
     logout(request)
     messages.error(request,'Sesion cerrada')

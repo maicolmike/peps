@@ -3,18 +3,63 @@
 
 {% block content %}
 
-<div class="col">
-    <div class="h2">{{ user.username }}</div>
-    <div class="h5 font-weight-bold">
-      Precio: <span class="text-danger">{{ user.email }}</span>
-    </div>
-    <div class="">
-      <p>{{ user.is_superuser }}</p>
-    </div>
-    <div class="">
-      
-    </div>
 
+
+
+{% if user.is_superuser == 1 %} <!-- valido que el usuario que ingresa a esta ruta sea un administrador tipo= 1-->
+
+
+<h3>{{ message }}</h3>
+
+<div class="container">  <!-- div inicial-->
+  <div class="card shadow table-responsive">
+      <div class="card-body table-responsive">
+          <!-- Tabla -->
+          <table class="table table-bordered table-hover"> <!-- table-striped-->
+            <!-- columnas de la tabla table-light thead-light table-secondary-->
+              <thead class="table-secondary">
+                  <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Usuario</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Tipo de usuario</th>
+                      <th scope="col">Fecha y hora de creacion</th>
+                  </tr>
+              </thead>
+          <!-- columnas de la tabla-->
+          <tbody>
+            <!-- inicio for -->
+              {% for usuarios in user_list %}
+                  <tr>
+                      <td>{{ usuarios.id }}</td> <!-- id-->
+                      <td>{{ usuarios.username }}</td> <!--username-->
+                      <td>{{ usuarios.email }}</td> <!-- email-->
+                      <!-- valido si el tipo de usuario es 1 me muestre administrador sino cliente-->
+                      {% if usuarios.is_superuser == 1 %}
+                      <td>Administrador</td>
+                      {% else %}
+                      <td>Cliente</td>
+                      {% endif %}
+                      <td>{{ usuarios.date_joined }}</td> <!-- fecha y hora de creacion-->
+                     
+                  </tr>
+              {% endfor %}
+              <!-- Final for -->
+          </tbody>
+
+      </table>
+
+      {% include 'usuarios/snippets/paginator.html' %}    <!--  Dentro de este archivo configuro las paginas -->
+
+<!-- final Tabla -->
+      </div>
   </div>
+</div>  <!-- div final-->
+
+{% else %}  <!-- aqui pongo el final del condicional para saber si el que accede es un administrador-->
+
+{% include 'accesoRestringido.html' %}    <!--  Dentro de este archivo configuro las paginas -->
+
+{% endif %}  <!-- aqui pongo el final del condicional para saber si el que accede es un administrador-->
 
 {% endblock %}
