@@ -24,6 +24,7 @@
                       <th scope="col">Email</th>
                       <th scope="col">Tipo de usuario</th>
                       <th scope="col">Fecha y hora de creacion</th>
+                      <th scope="col">Editar</th>
                   </tr>
               </thead>
           <!-- columnas de la tabla-->
@@ -41,8 +42,12 @@
                       <td>Cliente</td>
                       {% endif %}
                       <td>{{ usuarios.date_joined }}</td> <!-- fecha y hora de creacion-->
+                      <td><a href="" class="btn btn-primary fa-solid fa-pen" id="btn-edit{{ usuarios.id }}" data-toggle="modal" data-target="#modal{{ usuarios.id }}"></a></td>
                      
                   </tr>
+
+                  {% include 'usuarios/modalEditar.html' %}
+
               {% endfor %}
               <!-- Final for -->
           </tbody>
