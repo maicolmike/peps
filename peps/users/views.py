@@ -58,3 +58,27 @@ def UserUdpateView(request):
         return redirect('listarUsuarios')
 
     #return render(request, 'editarPruebas.html')
+    
+
+@login_required(login_url='login')    
+def UserUdpateClave(request):
+    
+    if request.method == 'POST':
+        user_id = request.POST.get('id')
+        new_password = request.POST.get('passnew')
+
+        try:
+            # Obtén el usuario de la base de datos
+            user = User.objects.get(id=user_id)
+
+            # Establece la nueva contraseña usando set_password()
+            user.set_password(new_password)
+
+            # Guarda el usuario, lo que encripta la nueva contraseña
+            user.save()
+
+            resultado = "Contraseña actualizada correctamente."
+        except User.DoesNotExist:
+            resultado = "El usuario no existe."
+
+        return redirect('listarUsuarios')

@@ -3,7 +3,7 @@ from django.urls import path
 #instaladas por mi
 from . import views 
 from django.urls import include
-from users.views import UsersListView,UserUdpateView
+from users.views import UsersListView,UserUdpateView,UserUdpateClave
 
 
 urlpatterns = [
@@ -15,4 +15,5 @@ urlpatterns = [
     path('usuarios/logout',views.logout_view, name='logout'),
     path('usuarios/list',UsersListView.as_view(), name='listarUsuarios'),
     path('usuarios/editar', UserUdpateView, name='updateusuarios'),
+    path('usuarios/editarClave', UserUdpateClave, name='updateusuariosClave'),
 ]
