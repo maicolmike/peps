@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required # vista basada en funciones que no permita acceder a paginas donde no se ha logeado
 
-from .forms import LoginUser,RegistroUsuario
+from .forms import LoginUser,RegistroUsuario,CambiarClaveForm
 from users.models import User
 
 
@@ -75,6 +75,8 @@ def register(request):
         'form': form,
         'title': "Registro",
         })
+    
+
 '''    
 @login_required(login_url='login')
 def listarUsuarios(request):

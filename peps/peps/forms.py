@@ -70,3 +70,19 @@ class RegistroUsuario(forms.Form):
         self.cleaned_data.get('email'),
         self.cleaned_data.get('password'),
         )
+        
+class CambiarClaveForm(forms.Form):
+    
+    passwordActual = forms.CharField(label= 'Contraseña actual',required=True,
+                               widget=forms.PasswordInput(attrs={'class': 'form-control',
+                                                             'id': 'password',
+                                                             'placeholder': 'Contraseña actual'}))
+    passwordNew = forms.CharField(label= 'Contraseña nueva',required=True,
+                               widget=forms.PasswordInput(attrs={'class': 'form-control',
+                                                             'id': 'passwordNew',
+                                                             'placeholder': 'Contraseña nueva'}))
+    passwordNewConfirm = forms.CharField(label= 'Confirmar Contraseña',
+                                required=True,
+                               widget=forms.PasswordInput(attrs={'class': 'form-control',
+                                                             'id': 'passwordNewConfirm',
+                                                             'placeholder': 'Confirmar contraseña'}))

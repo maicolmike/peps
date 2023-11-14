@@ -8,6 +8,9 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbid
 from django.contrib.auth.decorators import login_required # vista basada en funciones que no permita acceder a paginas donde no se ha logeado
 from django.contrib import messages
 import time # módulo time de Python, es parte de la biblioteca estándar de Python, y contiene la útil función sleep() que suspende o detiene un programa durante un número de determinado de segundos
+from peps.forms import CambiarClaveForm
+from django.contrib.auth import update_session_auth_hash
+
 
 # esta Clase sirve para listar los usuarios que se obtienen de la vista listar usuarios
 # esta asociada a los siguiente template-usuarios-list.html peps-peps-urls.py  
@@ -65,7 +68,7 @@ def UserUdpateClave(request):
 
         try:
             # Obtén el usuario de la base de datos
-            user = User.objects.get(id=user_id)
+            user = User.objects.get(id=user_id) #En contraste, si tuvieras un objeto User específico (por ejemplo, obtenido de una consulta a la base de datos), podrías hacer user.set_password(password_nueva) y user.save() para cambiar la contraseña de ese usuario en particular. Esto podría ser útil en situaciones donde estás trabajando con información específica de un usuario, independientemente de la sesión actual.
 
             # Establece la nueva contraseña usando set_password()
             user.set_password(new_password)
@@ -73,11 +76,15 @@ def UserUdpateClave(request):
             # Guarda el usuario, lo que encripta la nueva contraseña
             user.save()
             
+            # Actualizar la sesión del usuario para evitar cerrar sesión después de cambiar la contraseña
+            update_session_auth_hash(request, user)
+            
         except User.DoesNotExist:
             resultado = "El usuario no existe."
             
         time.sleep(1.5) #funcion para que se demore en redireccionar
         return redirect('listarUsuarios')
+        
     
 # esta funcion sirve para eliminar los usuarios que se obtienen de la vista listar usuarios
 # esta asociada a los siguiente template-usuarios-list.html peps-peps-urls.py  
@@ -99,3 +106,38 @@ def UserDelete(request):
         # Redirecciona a la lista de usuarios después de eliminar
         time.sleep(1.5) #funcion para que se demore en redireccionar
         return redirect('listarUsuarios')
+    
+@login_required(login_url='login')    
+def CambiarClave(request):
+    
+    form = CambiarClaveForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        password_actual = form.cleaned_data['passwordActual']
+        password_nueva = form.cleaned_data['passwordNew']
+        confirmar_password = form.cleaned_data['passwordNewConfirm']
+
+        # Validar que la contraseña actual sea correcta
+        if not request.user.check_password(password_actual):
+            messages.error(request, 'La contraseña actual es incorrecta.')
+            return render(request, 'usuarios/cambiarClave.html', {'form': form, 'title': 'Cambiar clave'})
+        
+        # Validar que la contraseña actual sea diferente de la nueva
+        if password_actual == password_nueva:
+            messages.error(request, 'La nueva contraseña debe ser diferente de la contraseña actual.')
+            return render(request, 'usuarios/cambiarClave.html', {'form': form, 'title': 'Cambiar clave'})
+        
+        # Validar que la nueva contraseña y la confirmación coincidan
+        if password_nueva != confirmar_password:
+            messages.error(request, 'Las contraseñas no coinciden.')
+            return render(request, 'usuarios/cambiarClave.html', {'form': form, 'title': 'Cambiar clave'})
+
+        # Cambiar la contraseña del usuario
+        request.user.set_password(password_nueva)   #request.user es específico para interactuar con el usuario que ha iniciado sesión en ese momento, 
+        request.user.save()
+
+        # Actualizar la sesión del usuario para evitar cerrar sesión después de cambiar la contraseña
+        update_session_auth_hash(request, request.user)
+
+        messages.success(request, 'Contraseña cambiada exitosamente.')
+
+    return render(request, 'usuarios/cambiarClave.html', {'form': form, 'title': 'Cambiar clave'})
