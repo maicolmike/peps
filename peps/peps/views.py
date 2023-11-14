@@ -75,11 +75,12 @@ def register(request):
         'form': form,
         'title': "Registro",
         })
-    
+'''    
 @login_required(login_url='login')
 def listarUsuarios(request):
     products = User.objects.all().order_by('id')
     return render(request, 'usuarios/list.html',{
         'title': "Index",
         'products': products,
-    })
+    })    
+'''

@@ -26,6 +26,7 @@
                       <th scope="col">Fecha y hora de creacion</th>
                       <th scope="col">Editar</th>
                       <th scope="col">Clave</th>
+                      <th scope="col">Borrar</th>
                   </tr>
               </thead>
           <!-- columnas de la tabla-->
@@ -45,11 +46,13 @@
                       <td>{{ usuarios.date_joined }}</td> <!-- fecha y hora de creacion-->
                       <td><a href="" class="btn btn-primary fa-solid fa-pen" id="btn-edit{{ usuarios.id }}" data-toggle="modal" data-target="#modal{{ usuarios.id }}"></a></td>
                       <td><a href="" class="btn btn-success fa-solid fa-lock" id="btn-cambiar{{ usuarios.id }}" data-toggle="modal" data-target="#modal2{{ usuarios.id }}"></a></td>
+                      <td><a href="" class="btn btn-danger fa-solid fa-trash" id="btn-eliminar{{ usuarios.id }}" data-toggle="modal" data-target="#modal3{{ usuarios.id }}"></a></td>
                      
                   </tr>
 
                   {% include 'usuarios/modalEditar.html' %}
                   {% include 'usuarios/modalClave.html' %}
+                  {% include 'usuarios/modalEliminar.html' %}
 
               {% endfor %}
               <!-- Final for -->
@@ -69,5 +72,10 @@
 {% include 'accesoRestringido.html' %}    <!--  Dentro de este archivo configuro las paginas -->
 
 {% endif %}  <!-- aqui pongo el final del condicional para saber si el que accede es un administrador-->
+
+<!-- Codigo para los mensajes con la libreria sweetalert-->
+<script src="{% static 'lib/sweetalert2-9.10.0/sweetalert2.all.min.js' %}"></script>
+<script src="{% static 'js/notificacionSwal.js' %}"></script>
+<script src="{% static 'js/mensajeAlert.js' %}"></script>
 
 {% endblock %}
