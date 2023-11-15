@@ -4,6 +4,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('pep/<int:pk>/', views.PersonaPEPDetailView.as_view(), name='persona_detail'),
+    path('detallePep/<int:pk>/', views.PersonaPEPDetailView.as_view(), name='persona_detalle'),
+    path('crearPep', views.crearPep, name='crear_pep'),
+    
     # Agrega otras URLs según tus necesidades
 ]
