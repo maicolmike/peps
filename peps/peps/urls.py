@@ -18,4 +18,5 @@ urlpatterns = [
     path('usuarios/editarClave', UserUdpateClave, name='updateusuariosClave'),
     path('usuarios/eliminarUsuarios', UserDelete, name='deleteusuarios'),
     path('usuarios/cambiarClave', CambiarClave, name='CambiarClave'),
+    path('persona/', include('personas.urls')),
 ]
