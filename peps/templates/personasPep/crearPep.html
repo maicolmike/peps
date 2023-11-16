@@ -5,16 +5,76 @@
 
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 
+<!-- inicio para el date picker-->
+<link rel="stylesheet" href="{% static 'lib/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.css' %}">
+<script src="{% static 'lib/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.js' %}"></script>
+<!-- Final para el date picker-->
+
 <div class="col">
     {% include 'messages.html' %}
     <h2>Crear Pep</h2>
     <!-- Formulario -->
     <form class="form-create" method="post">
         {% csrf_token %}
+
+        <div class="row">
+          <div class="col">
+            {{ form.nombre.label_tag }}
+            {{ form.nombre }}
+          </div>
+          <div class="col">
+            {{ form.identificacion.label_tag }}
+            {{ form.identificacion }}
+          </div>
+          <div class="col form-check">
+            {{ form.estado.label_tag }}
+            {{ form.estado }}
+          </div>
+          <div class="col">
+            {{ form.tipo_pep.label_tag }}
+            {{ form.tipo_pep }}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-check">
+            {{ form.cargo.label_tag }}
+            {{ form.cargo }}
+          </div>
+          <div class="col">
+            {{ form.fecha_vinculacion.label_tag }}
+            {{ form.fecha_vinculacion }}
+          </div>
+          <div class="col">
+            {{ form.fecha_desvinculacion.label_tag }}
+            {{ form.fecha_desvinculacion }}
+          </div>
+          <div class="col form-check">
+            {{ form.fecha_registro_pep.label_tag }}
+            {{ form.fecha_registro_pep }}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            {{ form.fecha_actualizacion.label_tag }}
+            {{ form.fecha_actualizacion }}
+          </div>
+          <div class="col">
+            {{ form.cuentas_extranjeras.label_tag }}
+            {{ form.cuentas_extranjeras }}
+          </div>
+          <div class="col">
+            {{ form.es_pep.label_tag }}
+            {{ form.es_pep }}
+          </div>
+        </div>
+
       
       <!-- Mostar el formulario de una manera mas rapida-->
+      <!-- 
       {% for field in form %}
-      <div class="form-group">
+      <div class="form-group mb-2 mr-sm-2">
   
         {{ field.label_tag }}
         {{ field }}
@@ -22,17 +82,18 @@
         {% if field.errors %}
         {{ field.errors }}
         {% endif %}
-  
+
       </div>
     {% endfor %}
+
+    -->
+
+    <script src="{% static 'js/datepicker.js' %}"></script>
     <button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Guardar</button>
-    
+
+
     </form>
     
   </div>
-
-
-
-
 
 {% endblock %}
