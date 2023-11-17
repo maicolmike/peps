@@ -6,6 +6,5 @@ from . import views
 urlpatterns = [
     path('detallePep/<int:pk>/', views.PersonaPEPDetailView.as_view(), name='persona_detalle'),
     path('crearPep', views.crearPep, name='crear_pep'),
-    
-    # Agrega otras URLs según tus necesidades
+    path('crearFamiliares', views.crearFamiliares, name='crear_Familiares'),
 ]

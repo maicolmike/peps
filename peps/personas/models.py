@@ -4,7 +4,7 @@ from django.db import models
 class PersonaPEP(models.Model):
     nombre = models.CharField(max_length=100)
     identificacion = models.CharField(max_length=20, unique=True)
-    es_pep = models.BooleanField(default=False)
+    es_pep = models.BooleanField(default=True)
     estado = models.CharField(max_length=50)
     tipo_pep = models.CharField(max_length=100)
     cargo = models.CharField(max_length=100)
@@ -20,8 +20,9 @@ class PersonaPEP(models.Model):
 class Familiar(models.Model):
     persona_pep = models.ForeignKey(PersonaPEP, on_delete=models.CASCADE, related_name='familiares')
     nombre = models.CharField(max_length=100)
-    parentesco = models.CharField(max_length=50)
     identificacion = models.CharField(max_length=20)
+    parentesco = models.CharField(max_length=50)
+    
 
     def __str__(self):
         return self.nombre

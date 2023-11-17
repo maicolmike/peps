@@ -17,6 +17,7 @@
     <form class="form-create" method="post">
         {% csrf_token %}
 
+  
         <div class="row">
           <div class="col">
             {{ form.nombre.label_tag }}
@@ -30,13 +31,14 @@
             {{ form.estado.label_tag }}
             {{ form.estado }}
           </div>
+          
+        </div>
+
+        <div class="row">
           <div class="col">
             {{ form.tipo_pep.label_tag }}
             {{ form.tipo_pep }}
           </div>
-        </div>
-
-        <div class="row">
           <div class="col form-check">
             {{ form.cargo.label_tag }}
             {{ form.cargo }}
@@ -45,6 +47,9 @@
             {{ form.fecha_vinculacion.label_tag }}
             {{ form.fecha_vinculacion }}
           </div>
+        </div>
+
+        <div class="row">
           <div class="col">
             {{ form.fecha_desvinculacion.label_tag }}
             {{ form.fecha_desvinculacion }}
@@ -53,24 +58,23 @@
             {{ form.fecha_registro_pep.label_tag }}
             {{ form.fecha_registro_pep }}
           </div>
-        </div>
-
-        <div class="row">
           <div class="col">
             {{ form.fecha_actualizacion.label_tag }}
             {{ form.fecha_actualizacion }}
           </div>
-          <div class="col">
-            {{ form.cuentas_extranjeras.label_tag }}
-            {{ form.cuentas_extranjeras }}
-          </div>
-          <div class="col">
-            {{ form.es_pep.label_tag }}
-            {{ form.es_pep }}
-          </div>
         </div>
 
-      
+        <div class="row row-cols-4" style="margin-left: 5px;">
+          <div class="col">
+            {{ form.cuentas_extranjeras }}
+            {{ form.cuentas_extranjeras.label_tag }}
+          </div>
+          <div class="col">
+            {{ form.es_pep }}
+            {{ form.es_pep.label_tag }}
+          </div>
+        </div>
+    
       <!-- Mostar el formulario de una manera mas rapida-->
       <!-- 
       {% for field in form %}
@@ -89,9 +93,10 @@
     -->
 
     <script src="{% static 'js/datepicker.js' %}"></script>
+    <br>
     <button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Guardar</button>
-
-
+    <a href="{% url 'crear_pep' %}" class="btn btn-primary">Nuevo</a>
+    <a href="{% url 'crear_Familiares' %}" class="btn btn-warning">Agregar Familiares</a>
     </form>
     
   </div>
