@@ -7,6 +7,8 @@ from .models import PersonaPEP,Familiar
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required # vista basada en funciones que no permita acceder a paginas donde no se ha logeado
 from .forms import CrearPepForm,CrearFamiliaresForm
+from django.urls import reverse
+from django.shortcuts import render, redirect
 from django.contrib import messages
 
 
@@ -18,33 +20,42 @@ class PersonaPEPDetailView(DetailView):
     
 @login_required(login_url='login')
 def crearPep(request):
-    
     form = CrearPepForm(request.POST or None)
-    
+
     if request.method == 'POST' and form.is_valid():
-        PersonaPEP = form.save()
-        PersonaPEP.save()
-        messages.success(request,'Persona Pep creada con exito')
-    
-    return render(request, 'personasPep/crearPep.html',{
+        persona_pep = form.save()
+        persona_pep.save()
+        messages.success(request, 'Persona Pep creada con éxito')
+
+        # Redirigir a la página de creación de familiares para este PEP
+        return redirect(reverse('crear_Familiares', kwargs={'persona_pep_id': persona_pep.id}))
+
+    return render(request, 'personasPep/crearPep.html', {
         'title': "Crear pep",
         'form': form
-        
-    })    
-    
+    })
     
 @login_required(login_url='login')
-def crearFamiliares(request):
-    
+def crearFamiliares(request, persona_pep_id):
+    # Asegurarse de que el persona_pep_id sea válido
+    try:
+        persona_pep = PersonaPEP.objects.get(id=persona_pep_id)
+    except PersonaPEP.DoesNotExist:
+        # Manejar el caso en el que el ID no es válido
+        messages.error(request, 'El ID de la persona PEP no es válido.')
+        return redirect('nombre_de_tu_vista_de_error')
+
     form = CrearFamiliaresForm(request.POST or None)
-    
+
     if request.method == 'POST' and form.is_valid():
-        Familiar = form.save()
-        Familiar.save()
-        messages.success(request,'Familiar ha sido creada con exito')
-    
-    return render(request, 'personasPep/crearFamiliares.html',{
+        familiar = form.save(commit=False)
+        familiar.persona_pep = persona_pep
+        familiar.save()
+        messages.success(request, 'Familiar ha sido creado con éxito')
+        # Crear una nueva instancia del formulario para reiniciar los campos
+        form = CrearFamiliaresForm()
+
+    return render(request, 'personasPep/crearFamiliares.html', {
         'title': "Crear Familiares",
         'form': form
-        
-    })    
+    })
