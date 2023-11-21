@@ -63,5 +63,5 @@ class CrearFamiliaresForm(ModelForm):
             'nombre': forms.TextInput(attrs={'class': 'form-control mb-2 mr-sm-2', 'placeholder': 'Nombre','id': 'nombre'}),
             'identificacion': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Identificacion','id': 'identificacion'}),
             'parentesco': forms.Select(attrs={'id': 'parentesco','class': 'form-control'}, 
-                                       choices=[('', 'Seleccionar'), ('Hijos (as)', 'Hijos (as)'), ('Hijos (as) adoptivos', 'Hijos (as) adoptivos'), ('Padres o madres', 'Padres o madres'), ('Padres adoptantes o madres adoptantes', 'Padres adoptantes o madres adoptantes'), ('Suegros (as)', 'Suegros (as)'), ('Yernos o nueras', 'Yernos o nueras'), ('Abuelos (as)', 'Abuelos (as)'), ('Hermanos (as)', 'Hermanos (as)'), ('Nietos (as)', 'Nietos (as)')]),
+                                       choices=[('', 'Seleccionar parentesco'), ('Hijos (as)', 'Hijos (as)'), ('Hijos (as) adoptivos', 'Hijos (as) adoptivos'), ('Padres o madres', 'Padres o madres'), ('Padres adoptantes o madres adoptantes', 'Padres adoptantes o madres adoptantes'), ('Suegros (as)', 'Suegros (as)'), ('Yernos o nueras', 'Yernos o nueras'), ('Abuelos (as)', 'Abuelos (as)'), ('Hermanos (as)', 'Hermanos (as)'), ('Nietos (as)', 'Nietos (as)')]),
         }

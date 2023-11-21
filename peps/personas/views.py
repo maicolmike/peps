@@ -44,7 +44,8 @@ def crearFamiliares(request, persona_pep_id):
         # Manejar el caso en el que el ID no es válido
         messages.error(request, 'El ID de la persona PEP no es válido.')
         return redirect('nombre_de_tu_vista_de_error')
-
+    
+    familiares = Familiar.objects.filter(persona_pep=persona_pep)
     form = CrearFamiliaresForm(request.POST or None)
 
     if request.method == 'POST' and form.is_valid():
@@ -54,8 +55,20 @@ def crearFamiliares(request, persona_pep_id):
         messages.success(request, 'Familiar ha sido creado con éxito')
         # Crear una nueva instancia del formulario para reiniciar los campos
         form = CrearFamiliaresForm()
-
-    return render(request, 'personasPep/crearFamiliares.html', {
+        
+    # Agregar información sobre la persona PEP al contexto
+    context = {
+        'title': "Crear Familiares",
+        'form': form,
+        'persona_pep': persona_pep,  # Agregar la instancia de persona_pep al contexto
+        'familiares': familiares,
+    }
+    
+    return render(request, 'personasPep/crearFamiliares3.html', context)
+'''
+    return render(request, 'personasPep/crearFamiliares2.html', {
         'title': "Crear Familiares",
         'form': form
     })
+    
+'''
