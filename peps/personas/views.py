@@ -64,7 +64,7 @@ def crearFamiliares(request, persona_pep_id):
         'familiares': familiares,
     }
     
-    return render(request, 'personasPep/crearFamiliares3.html', context)
+    return render(request, 'personasPep/crearFamiliares.html', context)
 '''
     return render(request, 'personasPep/crearFamiliares2.html', {
         'title': "Crear Familiares",

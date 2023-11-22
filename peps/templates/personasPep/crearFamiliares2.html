@@ -7,111 +7,117 @@
 
 
 <div class="col">
-    {% include 'messages.html' %}
-    <!-- -->
-    <div class="row" style="padding: 10px;">
-      <div class="col">
-        <a href="{% url 'crear_pep' %}" class="btn btn-success" style="background-color:rgb(4,105,4);">Volver</a>
-      </div>
-      <div class="row row-cols-2" style="padding: 2px;">
-        <h1 style="font-size: 16px;font-weight: bold;">Fecha de registro como pep: </h1> 
-        {{ persona_pep.fecha_registro_pep }}
-        <h7 style="font-size: 16px;font-weight: bold;">Fecha de actualziacion: </h7> 
-        {{ persona_pep.fecha_actualizacion }}
+  {% include 'messages.html' %}
+  <div class="row">
+    <div class="col-sm-7">
+      <a href="{% url 'crear_pep' %}" class="btn btn-success" style="background-color:rgb(4,105,4);">Volver</a>
+    </div>
+    <div class="col-sm-5">
+      <h6"><strong>Fecha de registro como Pep:</strong></h6>
+      <span style="margin-left:20px;">{{ persona_pep.fecha_registro_pep }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="" style="margin-left:700px;">
+      <h6"><strong>Fecha de actualizacion:</strong></h6>
+      <span style="margin-left:20px;">{{ persona_pep.fecha_actualizacion }}</span>
+    </div>
+  </div>
+  
+  <div class="row" style="padding-top: 30px;">
+    <div class="col">
+      <h4><strong>Datos del titular Pep</strong></h4>
+    </div>
+  </div>
+
+  <div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Identificacion</th>
+          <th>Nombres y apellidos</th>
+          <th>Cargo</th>
+          <th>Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ persona_pep.identificacion }}</td>
+          <td>{{ persona_pep.nombre }}</td>
+          <td>{{ persona_pep.cargo }}</td>
+          <td><a href="" class="btn btn-info fa-solid fa-pen-to-square"></a></td> 
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="" style="margin-left:650px;">
+        <h6"><strong>Fecha de vinculacion laboral:</strong></h6>
+        <span style="margin-left:20px;">{{ persona_pep.fecha_vinculacion }}</span>
       </div>
     </div>
-
-    <div>
-      <p>Datos del titular pep</p>
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th>Identificacion</th>
-            <th>Nombres y apellidos</th>
-            <th>Cargo</th>
-            <th>Accion</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ persona_pep.identificacion }}</td>
-            <td>{{ persona_pep.nombre }}</td>
-            <td>{{ persona_pep.cargo }}</td>
-            <td><a href="" class="btn btn-info fa-solid fa-pen-to-square"></a></td> 
-          </tr>
-        </tbody>
-      </table>
-      
-      <div class="row" style="padding: 5px;">
-        <div class="col">
-        </div>
-        <div class="row row-cols-2" style="padding: 2px;">
-          <h7 style="font-size: 16px;font-weight: bold;">Fecha de Vinculacon laboral: </h7> 
-          {{ persona_pep.fecha_vinculacion }}
-          <h7 style="font-size: 16px;font-weight: bold;">Fecha de desvinculacon laboral: </h7> 
-          {{ persona_pep.fecha_desvinculacion }}
-        </div>
-        
+    <div class="row">
+      <div class="" style="margin-left:622px;">
+        <h6"><strong>Fecha de desvinculacion laboral:</strong></h6>
+        <span style="margin-left:20px;">{{ persona_pep.fecha_desvinculacion }}</span>
       </div>
-
-      <div class="row">
-        <div class="col-5">
-        </div>
-        <div class="">
-          <h7 style="font-size: 16px;font-weight: bold;">Tiene cuentas en el extrangero: </h7> 
-          {{ persona_pep.cuentas_extranjeras }}
-        </div>
+    </div>
+    <div class="row">
+      <div class="" style="margin-left:550px;">
+        <h6"><strong>Tiene cuentas financieras en el extranjero:</strong></h6>
+        <span style="margin-left:20px;">{{ persona_pep.cuentas_extranjeras }}</span>
       </div>
-      
     </div>
+  </div>
 
-    <div style="padding-top: 40px;">
-      <p style="font-size: 16px;font-weight: bold;">Informacion del nucleo familiar</p>
+  <div class="row" style="padding-top: 30px;">
+    <div class="col" style="padding-bottom: 50px;">
+      <div class="card">
+        <div class="card-header"><strong>Informacion nucleo familiar</strong></div>
+        <div class="card-body">
+          <!-- Formulario -->
+          <form class="form-create" method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col">
+                {{ form.identificacion }}
+              </div>
+              <div class="col">
+                {{ form.nombre }}
+              </div>
+              <div class="col">
+                {{ form.parentesco }}
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Añadir</button>
+              </div>
+            </div>
+            <table class="table table-borderless table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Identificacion</th>
+                  <th>Nombres y apellidos</th>
+                  <th>Parentesco</th>
+                  <th>Accion</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for familiar in familiares %}
+                <tr>
+                  <td>{{ familiar.identificacion }}</td>
+                  <td>{{ familiar.nombre }}</td>
+                  <td>{{ familiar.parentesco }}</td>
+                  <td><a href="" class="btn btn-info fa-solid fa-pen-to-square"></a> <a href="" class="btn btn-danger fa-solid fa-trash"></a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </form>
+        </div> 
+      </div>
     </div>
-    
-    <!-- Formulario -->
-    <form class="form-create" method="post">
-        {% csrf_token %}
-        <div class="row">
-          <div class="col">
-            {{ form.identificacion }}
-          </div>
-          <div class="col">
-            {{ form.nombre }}
-          </div>
-          <div class="col">
-            {{ form.parentesco }}
-          </div>
-          <div class="col">
-            <button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Añadir</button>
-          </div>
-          
-        </div>
-        <table class="table table-borderless table-striped table-hover">
-          <thead>
-            <tr>
-              <th>Identificacion</th>
-              <th>Nombres y apellidos</th>
-              <th>Parentesco</th>
-              <th>Accion</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for familiar in familiares %}
-          <tr>
-            <td>{{ familiar.identificacion }}</td>
-            <td>{{ familiar.nombre }}</td>
-            <td>{{ familiar.parentesco }}</td>
-            <td><a href="" class="btn btn-info fa-solid fa-pen-to-square"></a> <a href="" class="btn btn-danger fa-solid fa-trash"></a></td>
-          </tr>
-        {% endfor %}
-          </tbody>
-        </table>
-
-    <a href="{% url 'crear_pep' %}" class="btn btn-primary">Cancelar</a>
-
-    </form>
-    
+  </div>
+  
 </div>
 
 {% endblock %}

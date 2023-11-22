@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+
+<div class="col">
+    {% include 'messages.html' %}
+    <h2>Crear Familiares</h2>
+    <!-- Formulario -->
+    <form class="form-create" method="post">
+        {% csrf_token %}
+
+        <!-- Mostar el formulario de una manera mas rapida-->
+    
+      {% for field in form %}
+      <div class="form-group mb-2 mr-sm-2">
+  
+        {{ field.label_tag }}
+        {{ field }}
+      
+        {% if field.errors %}
+        {{ field.errors }}
+        {% endif %}
+
+      </div>
+    {% endfor %}
+
+    
+    <button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Guardar</button>
+    <a href="{% url 'crear_pep' %}" class="btn btn-primary">Cancelar</a>
+
+    </form>
+    
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}
