@@ -10,6 +10,9 @@ from .forms import CrearPepForm,CrearFamiliaresForm
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin #vistas basada en clases
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic.edit import UpdateView,DeleteView
 
 
 
@@ -72,3 +75,12 @@ def crearFamiliares(request, persona_pep_id):
     })
     
 '''
+
+class ShippingAddressUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
+    login_url = 'login'
+    model = PersonaPEP
+    form_class = CrearPepForm
+    template_name = 'personasPep/editarPep.html'
+    
+    def get_success_url(self):
+        return reverse('shipping_addresses:shipping_addresses')

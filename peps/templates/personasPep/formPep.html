@@ -1,0 +1,87 @@
+{% load static %}
+   <!-- Formulario -->
+   <form class="form-create" method="post">
+    {% csrf_token %}
+
+
+    <div class="row">
+      <div class="col">
+        {{ form.nombre.label_tag }}
+        {{ form.nombre }}
+      </div>
+      <div class="col">
+        {{ form.identificacion.label_tag }}
+        {{ form.identificacion }}
+      </div>
+      <div class="col form-check">
+        {{ form.estado.label_tag }}
+        {{ form.estado }}
+      </div>
+      
+    </div>
+
+    <div class="row">
+      <div class="col">
+        {{ form.tipo_pep.label_tag }}
+        {{ form.tipo_pep }}
+      </div>
+      <div class="col form-check">
+        {{ form.cargo.label_tag }}
+        {{ form.cargo }}
+      </div>
+      <div class="col">
+        {{ form.fecha_vinculacion.label_tag }}
+        {{ form.fecha_vinculacion }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        {{ form.fecha_desvinculacion.label_tag }}
+        {{ form.fecha_desvinculacion }}
+      </div>
+      <div class="col form-check">
+        {{ form.fecha_registro_pep.label_tag }}
+        {{ form.fecha_registro_pep }}
+      </div>
+      <div class="col">
+        {{ form.fecha_actualizacion.label_tag }}
+        {{ form.fecha_actualizacion }}
+      </div>
+    </div>
+
+    <div class="row row-cols-3">
+      <div class="col">
+        <label style="padding-right: 0px;">{{ form.cuentas_extranjeras.label_tag }}</label>
+        {{ form.cuentas_extranjeras }}
+        
+      </div>
+      <div class="col">
+        <label style="padding-right: 25px;">{{ form.es_pep.label_tag }}</label>
+        {{ form.es_pep }}
+      </div>
+    </div>
+
+  <!-- Mostar el formulario de una manera mas rapida-->
+  <!-- 
+  {% for field in form %}
+  <div class="form-group mb-2 mr-sm-2">
+
+    {{ field.label_tag }}
+    {{ field }}
+  
+    {% if field.errors %}
+    {{ field.errors }}
+    {% endif %}
+
+  </div>
+{% endfor %}
+
+-->
+
+<script src="{% static 'js/datepicker.js' %}"></script>
+<br>
+<button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Guardar</button>
+</form>
+
+<!-- FIn Formulario -->
