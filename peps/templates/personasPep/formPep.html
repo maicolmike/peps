@@ -81,7 +81,10 @@
 
 <script src="{% static 'js/datepicker.js' %}"></script>
 <br>
-<button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Guardar</button>
+<button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">{{ message }}</button>
+{% if message == 'Actualizar'%}
+<a href="{% url 'crear_Familiares' persona_pep_id=persona_pep.pk %}" class="btn btn-success" style="background-color:rgb(119, 51, 5);">Cancelar</a>
+{% endif%}
 </form>
 
 <!-- FIn Formulario -->

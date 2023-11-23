@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 
 
 # Create your views here.
@@ -40,14 +40,7 @@ def crearPep(request):
     
 @login_required(login_url='login')
 def crearFamiliares(request, persona_pep_id):
-    # Asegurarse de que el persona_pep_id sea válido
-    try:
-        persona_pep = PersonaPEP.objects.get(id=persona_pep_id)
-    except PersonaPEP.DoesNotExist:
-        # Manejar el caso en el que el ID no es válido
-        messages.error(request, 'El ID de la persona PEP no es válido.')
-        return redirect('nombre_de_tu_vista_de_error')
-    
+    persona_pep = get_object_or_404(PersonaPEP, id=persona_pep_id)
     familiares = Familiar.objects.filter(persona_pep=persona_pep)
     form = CrearFamiliaresForm(request.POST or None)
 
@@ -56,25 +49,29 @@ def crearFamiliares(request, persona_pep_id):
         familiar.persona_pep = persona_pep
         familiar.save()
         messages.success(request, 'Familiar ha sido creado con éxito')
-        # Crear una nueva instancia del formulario para reiniciar los campos
         form = CrearFamiliaresForm()
-        
-    # Agregar información sobre la persona PEP al contexto
+
     context = {
         'title': "Crear Familiares",
         'form': form,
-        'persona_pep': persona_pep,  # Agregar la instancia de persona_pep al contexto
+        'persona_pep': persona_pep,
         'familiares': familiares,
     }
-    
+
     return render(request, 'personasPep/crearFamiliares.html', context)
-'''
-    return render(request, 'personasPep/crearFamiliares2.html', {
-        'title': "Crear Familiares",
-        'form': form
-    })
-    
-'''
+
+@login_required(login_url='login')
+def editarPep(request, pk):
+    persona_pep = get_object_or_404(PersonaPEP, pk=pk)
+    form = CrearPepForm(request.POST or None, instance=persona_pep)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, 'Persona Pep actualizada con éxito')
+
+        return redirect(reverse('crear_Familiares', kwargs={'persona_pep_id': persona_pep.pk}))
+
+    return render(request, 'personasPep/editarPep.html', {'title': 'Editar Pep', 'form': form, 'persona_pep': persona_pep})
 
 class ShippingAddressUpdateView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
     login_url = 'login'

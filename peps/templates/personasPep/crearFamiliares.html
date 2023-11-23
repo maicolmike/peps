@@ -45,7 +45,7 @@
                   <td>{{ persona_pep.identificacion }}</td>
                   <td>{{ persona_pep.nombre }}</td>
                   <td>{{ persona_pep.cargo }}</td>
-                  <td><a href="" class="btn btn-info fa-solid fa-pen-to-square"></a></td> 
+                  <td><a href="{% url 'editar_pep' pk=persona_pep.pk %}" class="btn btn-info fa-solid fa-pen-to-square"></a></td>
                 </tr>
               </tbody>
             </table>
