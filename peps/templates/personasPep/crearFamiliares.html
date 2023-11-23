@@ -91,8 +91,11 @@
               <div class="col">
                 {{ form.parentesco }}
               </div>
+              <div class="col form-check">
+                {{ form.estado }}
+              </div>
               <div class="col">
-                <button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Añadir</button>
+                <button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Añadir (+)</button>
               </div>
             </div>
             <table class="table table-borderless table-striped table-hover">
@@ -101,6 +104,7 @@
                   <th>Identificacion</th>
                   <th>Nombres y apellidos</th>
                   <th>Parentesco</th>
+                  <th>Estado</th>
                   <th>Accion</th>
                 </tr>
               </thead>
@@ -110,6 +114,7 @@
                   <td>{{ familiar.identificacion }}</td>
                   <td>{{ familiar.nombre }}</td>
                   <td>{{ familiar.parentesco }}</td>
+                  <td>{{ familiar.estado }}</td>
                   <td><a href="" class="btn btn-info fa-solid fa-pen-to-square"></a> <a href="" class="btn btn-danger fa-solid fa-trash"></a></td>
                 </tr>
                 {% endfor %}

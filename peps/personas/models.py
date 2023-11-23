@@ -23,6 +23,7 @@ class Familiar(models.Model):
     nombre = models.CharField(max_length=100)
     identificacion = models.CharField(max_length=20)
     parentesco = models.CharField(max_length=50)
+    estado = models.CharField(max_length=50)
     
 
     def __str__(self):
