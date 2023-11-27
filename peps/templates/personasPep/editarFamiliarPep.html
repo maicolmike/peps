@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+  <h2>{{ title }}</h2>
+  <form class="form-create" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Actualizar</button>
+    <a href="{% url 'crear_familiares' persona_pep_id=persona_pep.pk %}" class="btn btn-success" style="background-color:rgb(119, 51, 5);">Cancelar</a>
+    
+</form>
+  </form>
+{% endblock %}

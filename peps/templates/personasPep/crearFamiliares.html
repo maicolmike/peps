@@ -116,7 +116,7 @@
                   <td>{{ familiar.nombre }}</td>
                   <td>{{ familiar.parentesco }}</td>
                   <td>{{ familiar.estado }}</td>
-                  <td><a href="" class="btn btn-info fa-solid fa-pen-to-square"></a> <a href="" class="btn btn-danger fa-solid fa-trash"></a></td>
+                  <td><a href="{% url 'editar_familiar_pep' familiar_id=familiar.pk %}" class="btn btn-info fa-solid fa-pen-to-square" id="btn-edit{{ familiar.id }}"></a>  <a href="" class="btn btn-danger fa-solid fa-trash"></a></td>
                 </tr>
                 {% endfor %}
               </tbody>
