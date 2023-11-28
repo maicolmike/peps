@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.views.generic import DetailView
 from .models import PersonaPEP, Familiar
 from .forms import CrearPepForm, CrearFamiliaresForm
+import time # módulo time de Python, es parte de la biblioteca estándar de Python, y contiene la útil función sleep() que suspende o detiene un programa durante un número de determinado de segundos
+
 
 class PersonaPEPDetailView(DetailView):
     model = PersonaPEP
@@ -69,3 +71,14 @@ def editar_familiar_pep(request, familiar_id):
         return redirect('crear_familiares', persona_pep_id=persona_pep.pk)
 
     return render(request, 'personasPep/editarFamiliarPep.html', {'persona_pep': persona_pep, 'form': form, 'title': 'Editar Familiar Pep'})
+
+@login_required(login_url='login')
+def eliminar_familiar_pep(request, familiar_id):
+    familiar = get_object_or_404(Familiar, id=familiar_id)
+    persona_pep = familiar.persona_pep
+    familiar.delete()
+    messages.success(request, 'Familiar de Persona Pep eliminado con éxito')
+    # Redirecciona a la lista de usuarios después de eliminar
+    time.sleep(1.5) #funcion para que se demore en redireccionar
+    return redirect('crear_familiares', persona_pep_id=persona_pep.pk)
+    return redirect(reverse('crear_familiares', kwargs={'persona_pep_id': persona_pep.pk}))
