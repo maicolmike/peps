@@ -7,6 +7,7 @@ from django.views.generic import DetailView
 from .models import PersonaPEP, Familiar
 from .forms import CrearPepForm, CrearFamiliaresForm
 import time # módulo time de Python, es parte de la biblioteca estándar de Python, y contiene la útil función sleep() que suspende o detiene un programa durante un número de determinado de segundos
+from django.db import transaction
 
 
 class PersonaPEPDetailView(DetailView):
@@ -80,5 +81,26 @@ def eliminar_familiar_pep(request, familiar_id):
     messages.success(request, 'Familiar de Persona Pep eliminado con éxito')
     # Redirecciona a la lista de usuarios después de eliminar
     time.sleep(1.5) #funcion para que se demore en redireccionar
-    return redirect('crear_familiares', persona_pep_id=persona_pep.pk)
+    return redirect('crear_familiares', persona_pep_id=persona_pep.pk) # esta instruccion o la de abajo hacen lo mismo
     return redirect(reverse('crear_familiares', kwargs={'persona_pep_id': persona_pep.pk}))
+
+@login_required(login_url='login')
+def eliminar_persona_pep(request, persona_pep_id):
+    persona_pep = get_object_or_404(PersonaPEP, id=persona_pep_id)
+
+    try:
+        with transaction.atomic():
+            # Eliminar todos los familiares asociados
+            familiares = Familiar.objects.filter(persona_pep=persona_pep)
+            familiares.delete()
+
+            # Eliminar la PersonaPEP
+            persona_pep.delete()
+
+            messages.success(request, 'Persona Pep y sus familiares eliminados con éxito')
+
+    except Exception as e:
+        messages.error(request, f'Error al eliminar Persona Pep: {str(e)}')
+    
+    time.sleep(1.5) #funcion para que se demore en redireccionar
+    return redirect('crear_pep')  # Ajusta la ruta según tus necesidades

@@ -1,0 +1,38 @@
+<!-- modal eliminar Usuario-->
+
+<div class="modal fade" id="modal4{{ persona_pep.id }}"> 
+    <div class="modal-dialog modal-dialog-centered">  <!--<div class="modal-dialog modal-dialog-centered">-->
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h3 class="modal-title">Eliminar Pep y Familiares Pep</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form action="{% url 'eliminar_persona_pep' persona_pep_id=persona_pep.pk %}" method="post">
+            {% csrf_token %}
+
+            <div id="miDiv" class="form-inline col-sm-12 mt-3" style="display: none;">
+                <label class="control-label col-sm-4" for="id"><h5>id</h5></label>
+                <input readonly minlength="4" type="text" class="form-control col-sm-7" name="id" value="{{ persona_pep.id }}">
+            </div>  
+            
+          <h5>¿Estás seguro en eliminar al nucleo familiar de <b>{{ persona_pep.nombre }}</b></h5>
+          <h5>Recuerde que este proceso es irreversible.</h5>
+        </div>
+    
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary btnEditar">Eliminar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <!-- cierre modal eliminar Usuario-->

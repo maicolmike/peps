@@ -37,6 +37,8 @@
                   <th>Identificacion</th>
                   <th>Nombres y apellidos</th>
                   <th>Cargo</th>
+                  <th>Estado</th>
+                  <th>Es pep</th>
                   <th>Accion</th>
                 </tr>
               </thead>
@@ -45,6 +47,8 @@
                   <td>{{ persona_pep.identificacion }}</td>
                   <td>{{ persona_pep.nombre }}</td>
                   <td>{{ persona_pep.cargo }}</td>
+                  <td>{{ persona_pep.estado }}</td>
+                  <td>{{ persona_pep.es_pep }}</td>
                   <td><a href="{% url 'editar_pep' pk=persona_pep.pk %}" class="btn btn-info fa-solid fa-pen-to-square"></a></td>
                 </tr>
               </tbody>
@@ -132,7 +136,8 @@
       <br>
     
       <div style="display: flex; align-items: center; justify-content: center;">
-        <a href="" class="btn btn-danger" id="btn-eliminar{{ familiar.id }}">Eliminar pep y nucleo familiar</a>
+        <a href="" class="btn btn-danger" id="btn-eliminar{{ persona_pep.id }}" data-toggle="modal" data-target="#modal4{{ persona_pep.id }}">Eliminar pep y nucleo familiar</a>
+        {% include 'personasPep/modalEliminarPepFamiliares.html' %}
       </div>
       
     </div>
