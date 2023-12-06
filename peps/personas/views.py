@@ -14,6 +14,11 @@ class PersonaPEPDetailView(DetailView):
     model = PersonaPEP
     template_name = 'personasPep/personaPep_detalle.html'
     context_object_name = 'persona'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Persona PEP DetailView'  # Reemplaza con el título que desees
+        return context
 
 @login_required(login_url='login')
 def crear_pep(request):
@@ -104,3 +109,9 @@ def eliminar_persona_pep(request, persona_pep_id):
     
     time.sleep(1.5) #funcion para que se demore en redireccionar
     return redirect('crear_pep')  # Ajusta la ruta según tus necesidades
+
+
+@login_required(login_url='login')
+def consultar_pep(request):
+    
+    return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep" })

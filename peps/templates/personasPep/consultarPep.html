@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col" style="margin-right: 15px; border: 1px solid rgb(180, 180, 180); padding: 14px;">
+        <h5><b>Consultar documento de identificación</b></h5>
+        <br>
+        <input type="text" placeholder="Digite número de documento" style="margin-right: 15px;">
+        <button class="btn-success">Consultar</button>
+    </div>
+    
+    <div class="col" style="border: 1px solid rgb(180, 180, 180); padding: 14px;">
+        <div class="row">
+            <div class="col">
+                <h5><b>Resultado de la búsqueda</b></h5>
+            </div>
+            <div class="col" style="display: flex; flex-direction: column; align-items: center;">
+                <h5><b>Ver</b></h5>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <h6>Familiar PEP DE PEPITO PEREZ</h6>
+                <h6>Es familiar de un PEP</h6>
+            </div>
+            <div class="col" style="display: flex; flex-direction: column; align-items: center;">
+                <a href="" class="btn btn-success fa-regular fa-eye"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
