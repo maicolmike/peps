@@ -3,34 +3,86 @@
 
 {% block content %}
 
-<div class="row">
-    <div class="col" style="margin-right: 15px; border: 1px solid rgb(180, 180, 180); padding: 14px;">
-        <h5><b>Consultar documento de identificación</b></h5>
-        <br>
-        <input type="text" placeholder="Digite número de documento" style="margin-right: 15px;">
-        <button class="btn-success">Consultar</button>
+<div class="container">
+    <!-- div inicial -->
+    <div class="container">
+        <div class="row">
+            <div class="col" style=" margin-right: 15px; border-radius: 20px; padding: 1em;text-align: center;">
+                <div class="card shadow table-responsive" style="border-radius: 20px;">
+                    <div class="card-body table-responsive">
+                        <img src="{% static 'img/logoCootep.png' %}" width="200" height="" alt="COOTEP LTDA" title="COOTEP LTDA">
+                        <h5><b>Consultar documento de identificación</b></h5>
+                        
+                        <input type="text" placeholder="Digite número de documento" style="margin-right: 15px;">
+                        <a href="" class="btn btn-success">Consultar</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col" style="border-radius: 20px; padding: 1em; text-align: center;">
+                <div class="card shadow table-responsive" style=" height: 100%; border-radius: 20px;">
+                    <div class="card-body table-responsive">
+                        <div class="row">
+                            <div class="col">
+                                <h5><b>Resultado de la búsqueda</b></h5>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h6>PABLO PEPITO PEREZ JARAMILLO</h6>
+                                <h6>Es familiar de un PEP</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <br>
+                                <a href="" class="btn btn-success fa-regular fa-eye"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <br>
     </div>
+    <!-- div final-->
     
-    <div class="col" style="border: 1px solid rgb(180, 180, 180); padding: 14px;">
-        <div class="row">
-            <div class="col">
-                <h5><b>Resultado de la búsqueda</b></h5>
-            </div>
-            <div class="col" style="display: flex; flex-direction: column; align-items: center;">
-                <h5><b>Ver</b></h5>
+<br>
+    <div class="container">  <!-- div inicial-->
+        <div class="card shadow table-responsive">
+            <div class="card-body table-responsive">
+                <h4>Listado de asociados pep</h4>
+                <!-- Tabla -->
+                <table class="table table-bordered table-hover"> <!-- table-striped-->
+                  <!-- columnas de la tabla table-light thead-light table-secondary-->
+                    <thead class="table-secondary">
+                        <tr>
+                            <th scope="col">Identificacion</th>
+                            <th scope="col">Nombre y apellidos</th>
+                            <th scope="col">Ver nucleo familiar</th>
+                        </tr>
+                    </thead>
+                <!-- columnas de la tabla-->
+                <tbody>
+                  <!-- inicio for -->
+                        <tr>
+                            <td></td> <!-- id-->
+                            <td></td> <!--username-->
+                            <td></td> <!-- email-->
+                        </tr>
+                    <!-- Final for -->
+                </tbody>
+      
+                </table>
+      
+            {% include 'usuarios/snippets/paginator.html' %}    <!--  Dentro de este archivo configuro las paginas -->
+      
+      <!-- final Tabla -->
             </div>
         </div>
-        <br>
-        <div class="row">
-            <div class="col">
-                <h6>Familiar PEP DE PEPITO PEREZ</h6>
-                <h6>Es familiar de un PEP</h6>
-            </div>
-            <div class="col" style="display: flex; flex-direction: column; align-items: center;">
-                <a href="" class="btn btn-success fa-regular fa-eye"></a>
-            </div>
-        </div>
-    </div>
+    </div>  <!-- div final-->
+
 </div>
 
 {% endblock %}
