@@ -2,10 +2,131 @@
 {% load static %}
 
 {% block content %}
-
-    <h1>{{ persona.nombre }}</h1>
-    <p>Identificación: {{ persona.identificacion }}</p>
-    <p>Tipo PEP: {{ persona.tipo_pep }}</p>
-    <!-- Agrega más detalles según sea necesario -->
+    <div class="col">
+        <div class="row">
+            <div class="col-sm-7">
+                <a href="{% url 'consultar_pep' %}" class="btn btn-success" id="volverBtn" onclick="guardarInformacion()" style="background-color:rgb(4,105,4);">Volver</a>
+            </div>
+            <div class="col-sm-5">
+              <h6"><strong>Fecha de registro como Pep:</strong></h6>
+              <span style="margin-left:20px;">{{ persona.fecha_registro_pep }}</span>
+            </div>
+        </div>
+      
+        <div class="row">
+          <div class="" style="margin-left:700px;">
+            <h6"><strong>Fecha de actualizacion:</strong></h6>
+            <span style="margin-left:20px;">{{ persona.fecha_actualizacion }}</span>
+          </div>
+        </div>
+      
+        <div class="row" style="padding-top: 30px;">
+          <div class="col">
+            <div class="card">
+              <div class="card-header"><h6><strong>Datos del titular Pep</strong></h6></div>
+              <div class="card-body">
+                <div>
+                  <table class="table table-borderless table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Identificacion</th>
+                        <th>Nombres y apellidos</th>
+                        <th>Cargo</th>
+                        <th>Estado</th>
+                        <th>Es pep</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{ persona.identificacion }}</td>
+                        <td>{{ persona.nombre }}</td>
+                        <td>{{ persona.cargo }}</td>
+                        <td>{{ persona.estado }}</td>
+                        <td>{{ persona.es_pep }}</td>
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="row">
+                    <div class="" style="margin-left:650px;">
+                      <h6"><strong>Fecha de vinculacion laboral:</strong></h6>
+                      <span style="margin-left:20px;">{{ persona.fecha_vinculacion }}</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="" style="margin-left:622px;">
+                      <h6"><strong>Fecha de desvinculacion laboral:</strong></h6>
+                      <span style="margin-left:20px;">{{ persona.fecha_desvinculacion }}</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="" style="margin-left:550px;">
+                      <h6"><strong>Tiene cuentas financieras en el extranjero:</strong></h6>
+                      <span style="margin-left:20px;">{{ persona.cuentas_extranjeras }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </div>
+        </div>
+      
+        <div class="row" style="padding-top: 30px;">
+          <div class="col" style="padding-bottom: 50px;">
+            <div class="card">
+              <div class="card-header"><strong>Informacion nucleo familiar</strong></div>
+              <div class="card-body">
+                <!-- Inicio Formulario -->
+                <form class="form-create" method="post">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col">
+                      {{ form.identificacion }}
+                    </div>
+                    <div class="col">
+                      {{ form.nombre }}
+                    </div>
+                    <div class="col">
+                      {{ form.parentesco }}
+                    </div>
+                    <div class="col form-check">
+                      {{ form.estado }}
+                    </div>
+                    
+                  </div>
+                  <table class="table table-borderless table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Identificacion</th>
+                        <th>Nombres y apellidos</th>
+                        <th>Parentesco</th>
+                        <th>Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for familiar in familiares %}
+                      <tr>
+                        <td>{{ familiar.identificacion }}</td>
+                        <td>{{ familiar.nombre }}</td>
+                        <td>{{ familiar.parentesco }}</td>
+                        <td>{{ familiar.estado }}</td>
+                       
+                      </tr>
+                
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </form>
+                <!-- Fin Formulario -->
+              </div>
+            </div>
+      
+            <br>
+            
+          </div>
+        </div>
+        
+      </div>
 
 {% endblock %}

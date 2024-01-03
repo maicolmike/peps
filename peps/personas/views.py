@@ -8,6 +8,7 @@ from .models import PersonaPEP, Familiar
 from .forms import CrearPepForm, CrearFamiliaresForm
 import time # módulo time de Python, es parte de la biblioteca estándar de Python, y contiene la útil función sleep() que suspende o detiene un programa durante un número de determinado de segundos
 from django.db import transaction
+from .forms import ConsultarDocumentoForm
 
 
 class PersonaPEPDetailView(DetailView):
@@ -17,7 +18,10 @@ class PersonaPEPDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Persona PEP DetailView'  # Reemplaza con el título que desees
+        # Agrega la información de los familiares al contexto
+        familiares = self.object.familiares.all()
+        context['familiares'] = familiares
+        context['title'] = 'Persona PEP DetailView'
         return context
 
 @login_required(login_url='login')
@@ -110,8 +114,24 @@ def eliminar_persona_pep(request, persona_pep_id):
     time.sleep(1.5) #funcion para que se demore en redireccionar
     return redirect('crear_pep')  # Ajusta la ruta según tus necesidades
 
-
 @login_required(login_url='login')
 def consultar_pep(request):
-    
-    return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep" })
+    if request.method == 'POST':
+        documento = request.POST.get('documento', '')
+        try:
+            # Intenta buscar la Persona PEP por identificación
+            persona_encontrada = PersonaPEP.objects.get(identificacion=documento)
+            return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep", 'persona_encontrada': persona_encontrada})
+        except PersonaPEP.DoesNotExist:
+            # Si no se encuentra la Persona PEP, busca entre los familiares
+            familiares_encontrados = Familiar.objects.filter(identificacion=documento)
+            if familiares_encontrados.exists():
+                # Si hay familiares encontrados, muestra la información
+                return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep", 'familiares_encontrados': familiares_encontrados})
+            else:
+                # Si no se encuentra ninguna coincidencia, muestra un mensaje
+                messages.warning(request, 'Documento no encontrado')
+                return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep", 'mensaje': 'Documento no encontrado'})
+    else:
+        # Si la solicitud no es POST, simplemente renderiza el formulario vacío
+        return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep"})
