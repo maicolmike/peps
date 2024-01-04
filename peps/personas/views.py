@@ -9,12 +9,15 @@ from .forms import CrearPepForm, CrearFamiliaresForm
 import time # módulo time de Python, es parte de la biblioteca estándar de Python, y contiene la útil función sleep() que suspende o detiene un programa durante un número de determinado de segundos
 from django.db import transaction
 from .forms import ConsultarDocumentoForm
+from django.views.generic.list import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin # vista basada en clases que no permita acceder a paginas donde no se ha logeado
 
 
 class PersonaPEPDetailView(DetailView):
     model = PersonaPEP
     template_name = 'personasPep/personaPep_detalle.html'
     context_object_name = 'persona'
+    paginate_by = 1
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -22,6 +25,7 @@ class PersonaPEPDetailView(DetailView):
         familiares = self.object.familiares.all()
         context['familiares'] = familiares
         context['title'] = 'Persona PEP DetailView'
+        #print(context)
         return context
 
 @login_required(login_url='login')
@@ -135,3 +139,26 @@ def consultar_pep(request):
     else:
         # Si la solicitud no es POST, simplemente renderiza el formulario vacío
         return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep"})
+    
+@login_required(login_url='login')
+def consultar_pep2(request):
+    # Obtener la lista de asociados PEP, esto depende de tu modelo y lógica de negocio
+    lista_de_asociados_pep = PersonaPEP.objects.all()
+
+    return render(request, 'personasPep/consultarPep2.html', {'title': "Listado asociados pep",'lista_de_asociados_pep': lista_de_asociados_pep})
+
+class PepListView(LoginRequiredMixin,ListView):
+    login_url = 'login'
+    template_name = 'personasPep/pepListado.html'
+    queryset = PersonaPEP.objects.all().order_by('id')
+    #print(queryset)
+    paginate_by = 7
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['message'] = 'Listado de Asociados pep'
+        context['title'] = 'Listado de Asociados pep'
+        #print(context) # para saber que variable debe tener en este caso son object_list o user_list
+        #context['usersList']=context['user_list']
+        
+        return context

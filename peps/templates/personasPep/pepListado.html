@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- div inicial-->
+<h4>Listado de asociados pep</h4>
+<div class="container">
+    <div class="card shadow table-responsive">
+        <div class="card-body table-responsive">
+            
+            <!-- Tabla -->
+            <table class="table table-bordered table-hover">
+                <thead class="table-secondary">
+                    <tr>
+                        <th scope="col">Identificacion</th>
+                        <th scope="col">Nombre y apellidos</th>
+                        <th scope="col">Ver nucleo familiar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterar sobre la lista de asociados PEP -->
+                    {% for asociado in object_list %}
+                        <tr>
+                            <td>{{ asociado.identificacion }}</td>
+                            <td>{{ asociado.nombre }}</td>
+                            <td>
+                                <!-- Enlace para ver el núcleo familiar del asociado -->
+                                <a href="{% url 'persona_detalle' asociado.id %}" class="btn btn-success fa-regular fa-eye"></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% include 'usuarios/snippets/paginator.html' %} <!-- Configuración de paginación -->
+        </div>
+    </div>
+</div> <!-- div final-->
+
+
+{% endblock %}
