@@ -5,7 +5,7 @@
     <div class="col">
         <div class="row">
             <div class="col-sm-7">
-                <a href="{% url 'consultar_pep' %}" class="btn btn-success" id="volverBtn" onclick="guardarInformacion()" style="background-color:rgb(4,105,4);">Volver</a>
+              <a href="#" class="btn btn-success" id="volverBtn" onclick="volverPaginaAnterior()" style="background-color:rgb(4,105,4);">Volver</a>
             </div>
             <div class="col-sm-5">
               <h6"><strong>Fecha de registro como Pep:</strong></h6>
@@ -128,5 +128,12 @@
         </div>
         
       </div>
+
+      
+      <script>
+        function volverPaginaAnterior() {
+            history.back();
+        }
+        </script>
 
 {% endblock %}

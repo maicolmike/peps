@@ -1,0 +1,151 @@
+<!-- modal editar-->
+
+<div class="modal fade" id="modal{{ persona_encontrada.id }}"> 
+  <div class="modal-dialog modal-dialog-centered modal-xl">  <!--<div class="modal-dialog modal-dialog-centered">-->
+    <div class="modal-content">
+    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form action="#" method="post">
+          {% csrf_token %}
+      
+
+          <div class="col">
+            <div class="row">
+                <div class="col-sm-7">
+                    
+                </div>
+                <div class="col-sm-5">
+                  <h6"><strong>Fecha de registro como Pep:</strong></h6>
+                  <span style="margin-left:20px;">{{ persona_encontrada.fecha_registro_pep }}</span>
+                </div>
+            </div>
+          
+            <div class="row">
+              <div class="" style="margin-left:700px;">
+                <h6"><strong>Fecha de actualizacion:</strong></h6>
+                <span style="margin-left:20px;">{{ persona_encontrada.fecha_actualizacion }}</span>
+              </div>
+            </div>
+          
+            <div class="row" style="padding-top: 30px;">
+              <div class="col">
+                <div class="card">
+                  <div class="card-header"><h6><strong>Datos del titular Pep</strong></h6></div>
+                  <div class="card-body">
+                    <div>
+                      <table class="table table-borderless table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>Identificacion</th>
+                            <th>Nombres y apellidos</th>
+                            <th>Cargo</th>
+                            <th>Estado</th>
+                            <th>Es pep</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{ persona_encontrada.identificacion }}</td>
+                            <td>{{ persona_encontrada.nombre }}</td>
+                            <td>{{ persona_encontrada.cargo }}</td>
+                            <td>{{ persona_encontrada.estado }}</td>
+                            <td>{{ persona_encontrada.es_pep }}</td>
+                            
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="row">
+                        <div class="" style="margin-left:650px;">
+                          <h6"><strong>Fecha de vinculacion laboral:</strong></h6>
+                          <span style="margin-left:20px;">{{ persona_encontrada.fecha_vinculacion }}</span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="" style="margin-left:622px;">
+                          <h6"><strong>Fecha de desvinculacion laboral:</strong></h6>
+                          <span style="margin-left:20px;">{{ persona_encontrada.fecha_desvinculacion }}</span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="" style="margin-left:550px;">
+                          <h6"><strong>Tiene cuentas financieras en el extranjero:</strong></h6>
+                          <span style="margin-left:20px;">{{ persona_encontrada.cuentas_extranjeras }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
+                </div>
+              </div>
+            </div>
+          
+            <div class="row" style="padding-top: 30px;">
+              <div class="col" style="padding-bottom: 50px;">
+                <div class="card">
+                  <div class="card-header"><strong>Informacion nucleo familiar</strong></div>
+                  <div class="card-body">
+                    <!-- Inicio Formulario -->
+                    <form class="form-create" method="post">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col">
+                          {{ form.identificacion }}
+                        </div>
+                        <div class="col">
+                          {{ form.nombre }}
+                        </div>
+                        <div class="col">
+                          {{ form.parentesco }}
+                        </div>
+                        <div class="col form-check">
+                          {{ form.estado }}
+                        </div>
+                        
+                      </div>
+                      <table class="table table-borderless table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>Identificacion</th>
+                            <th>Nombres y apellidos</th>
+                            <th>Parentesco</th>
+                            <th>Estado</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for familiar in familiares %}
+                          <tr>
+                            <td>{{ familiar.identificacion }}</td>
+                            <td>{{ familiar.nombre }}</td>
+                            <td>{{ familiar.parentesco }}</td>
+                            <td>{{ familiar.estado }}</td>
+                           
+                          </tr>
+                    
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </form>
+                    <!-- Fin Formulario -->
+                  </div>
+                </div>
+          
+                <br>
+                
+              </div>
+            </div>
+            
+          </div>
+      </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<!-- cierre modal editar-->

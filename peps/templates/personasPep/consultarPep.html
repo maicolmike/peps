@@ -37,10 +37,13 @@
                                 <h6>{{ persona_encontrada.nombre }} {{ persona_encontrada.identificacion }}</h6>
                                 <h6><b>Es un PEP</b></h6>
                                 <a href="{% url 'persona_detalle' persona_encontrada.id %}" class="btn btn-success fa-regular fa-eye"></a>
+                              <!-- <a href="" class="btn btn-primary fa-solid fa-pen" id="btn-edit{{ persona_encontrada.id }}" data-toggle="modal" data-target="#modal{{ persona_encontrada.id }}"></a>-->  
+                              {#  {% include 'personasPep/modalVerdetallesPep.html' %} #}
                                 {% elif familiares_encontrados %}
                                 {% for familiar in familiares_encontrados %}
                                 <h6>{{ familiar.nombre }} - Es familiar de <b>{{ familiar.persona_pep.nombre }}</b> {{ familiar.persona_pep.identificacion }}</h6>
                                 <a href="{% url 'persona_detalle' familiar.persona_pep.id %}" class="btn btn-success fa-regular fa-eye"></a>
+                                
                                 {% endfor %}
                             </div>
                         </div>
