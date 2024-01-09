@@ -6,6 +6,7 @@ from django.urls import include
 from users.views import UsersListView,UserUdpateView,UserUdpateClave,UserDelete,CambiarClave
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     #instaladas por mi

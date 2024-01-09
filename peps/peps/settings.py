@@ -140,6 +140,13 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Configurar la duración de la sesión en segundos (5 minutos)
+SESSION_COOKIE_AGE = 300
+SESSION_COOKIE_SECURE = 300
+SESSION_COOKIE_HTTPONLY = 300
+
+# Configurar para que la sesión se actualice con cada solicitud
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

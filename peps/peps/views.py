@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required # vista basada en func
 from .forms import LoginUser,RegistroUsuario
 
 
+
 @login_required(login_url='login')
 def index(request):
     return render(request, 'index.html',{
@@ -74,7 +75,6 @@ def register(request):
         'form': form,
         'title': "Registro",
         })
-    
 
 '''    
 @login_required(login_url='login')

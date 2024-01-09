@@ -15,7 +15,7 @@
                     <tr>
                         <th scope="col">Identificacion</th>
                         <th scope="col">Nombre y apellidos</th>
-                        <th scope="col">Ver nucleo familiar</th>
+                        <th scope="col" style="text-align: center;">Ver nucleo familiar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,7 +24,7 @@
                         <tr>
                             <td>{{ asociado.identificacion }}</td>
                             <td>{{ asociado.nombre }}</td>
-                            <td>
+                            <td style="text-align: center;">
                                 <!-- Enlace para ver el núcleo familiar del asociado -->
                                 <a href="{% url 'persona_detalle' asociado.id %}" class="btn btn-success fa-regular fa-eye"></a>
                             </td>

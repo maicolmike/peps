@@ -32,12 +32,26 @@ class PersonaPEPDetailView(DetailView):
 def crear_pep(request):
     form = CrearPepForm(request.POST or None)
 
-    if request.method == 'POST' and form.is_valid():
-        persona_pep = form.save()
-        persona_pep.save()
-        messages.success(request, 'Persona Pep creada con éxito')
-        return redirect(reverse('crear_familiares', kwargs={'persona_pep_id': persona_pep.id}))
+    if request.method == 'POST':
+        identificacion = request.POST.get('identificacion', None)
 
+        # Verificar si la cédula ya existe en la base de datos
+        if identificacion and PersonaPEP.objects.filter(identificacion=identificacion).exists():
+            # Si la cédula ya existe, mostrar un mensaje de error
+            messages.error(request, 'La Persona Pep ya está registrada.')
+            return render(request, 'personasPep/crearPep.html', {'title': "Crear pep", 'form': form})
+
+        # Si la cédula no existe, proceder con la validación del formulario
+        if form.is_valid():
+            # Guardar la nueva Persona PEP
+            persona_pep = form.save()
+            persona_pep.save()
+
+            # Redireccionar a la creación de familiares
+            messages.success(request, 'Persona Pep creada con éxito')
+            return redirect(reverse('crear_familiares', kwargs={'persona_pep_id': persona_pep.id}))
+    
+    # Si la solicitud no es POST o el formulario no es válido, mostrar el formulario
     return render(request, 'personasPep/crearPep.html', {'title': "Crear pep", 'form': form})
 
 @login_required(login_url='login')
