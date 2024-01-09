@@ -49,6 +49,14 @@ class CrearPepForm(ModelForm):
             'cuentas_extranjeras': forms.RadioSelect(attrs={'id': 'cuentas_extranjeras','class': ''}, choices=[('Si', 'Sí'), ('No', 'No')]),
             #'cuentas_extranjeras': forms.CheckboxInput(attrs={'class': 'form-check-input', 'id': 'cuentas_extranjeras'}),
         }
+        #usuario no se repita y no genere error
+        ''' def clean_username(self):
+            identificacion = self.cleaned_data.get('identificacion')
+            
+            if PersonaPEP.objects.filter(identificacion=identificacion).exists() :
+                raise forms.ValidationError("el asociado pep ya se encuentra creado")
+            
+            return identificacion '''
         
 class CrearFamiliaresForm(ModelForm):
     class Meta:

@@ -120,26 +120,29 @@ def eliminar_persona_pep(request, persona_pep_id):
 
 @login_required(login_url='login')
 def consultar_pep(request):
+    lista_de_asociados_pep = PersonaPEP.objects.all()
+    
+
     if request.method == 'POST':
         documento = request.POST.get('documento', '')
         try:
             # Intenta buscar la Persona PEP por identificación
             persona_encontrada = PersonaPEP.objects.get(identificacion=documento)
-            return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep", 'persona_encontrada': persona_encontrada})
+            return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep", 'persona_encontrada': persona_encontrada,'lista_de_asociados_pep': lista_de_asociados_pep})
         except PersonaPEP.DoesNotExist:
             # Si no se encuentra la Persona PEP, busca entre los familiares
             familiares_encontrados = Familiar.objects.filter(identificacion=documento)
             if familiares_encontrados.exists():
                 # Si hay familiares encontrados, muestra la información
-                return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep", 'familiares_encontrados': familiares_encontrados})
+                return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep", 'familiares_encontrados': familiares_encontrados,'lista_de_asociados_pep': lista_de_asociados_pep})
             else:
                 # Si no se encuentra ninguna coincidencia, muestra un mensaje
                 messages.warning(request, 'Documento no encontrado')
-                return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep", 'mensaje': 'Documento no encontrado'})
+                return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep", 'mensaje': 'Documento no encontrado','lista_de_asociados_pep': lista_de_asociados_pep})
     else:
         # Si la solicitud no es POST, simplemente renderiza el formulario vacío
-        return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep"})
-    
+        return render(request, 'personasPep/consultarPep.html', {'title': "Consultar pep",'lista_de_asociados_pep': lista_de_asociados_pep})
+     
 @login_required(login_url='login')
 def consultar_pep2(request):
     # Obtener la lista de asociados PEP, esto depende de tu modelo y lógica de negocio
