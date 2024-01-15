@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+{% if user.is_superuser == 1 %} <!-- valido que el usuario que ingresa a esta ruta sea un administrador tipo= 1-->
 
 <!-- div inicial-->
 <h4>Listado de asociados pep</h4>
@@ -16,6 +17,7 @@
                         <th scope="col">Identificacion</th>
                         <th scope="col">Nombre y apellidos</th>
                         <th scope="col" style="text-align: center;">Ver nucleo familiar</th>
+                        <th scope="col" style="text-align: center;">Editar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +30,10 @@
                                 <!-- Enlace para ver el núcleo familiar del asociado -->
                                 <a href="{% url 'persona_detalle' asociado.id %}" class="btn btn-success fa-regular fa-eye"></a>
                             </td>
+                            <td style="text-align: center;">
+                                <!-- Enlace para ver el núcleo familiar del asociado -->
+                                <a href="{% url 'crear_familiares' persona_pep_id=asociado.id %}?messageListado=Actualizar" class="btn btn-info fa-solid fa-pen-to-square"></a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -38,5 +44,10 @@
     </div>
 </div> <!-- div final-->
 
+{% else %}  <!-- aqui pongo el final del condicional para saber si el que accede es un administrador-->
+
+{% include 'accesoRestringido.html' %}    <!--  Dentro de este archivo configuro el mensaje a mostar -->
+
+{% endif %}  <!-- aqui pongo el final del condicional para saber si el que accede es un administrador-->
 
 {% endblock %}

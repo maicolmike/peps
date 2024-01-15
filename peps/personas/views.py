@@ -59,6 +59,7 @@ def crear_familiares(request, persona_pep_id):
     persona_pep = get_object_or_404(PersonaPEP, id=persona_pep_id)
     familiares = Familiar.objects.filter(persona_pep=persona_pep)
     form = CrearFamiliaresForm(request.POST or None)
+    messageListado = request.GET.get('messageListado', None)
 
     if request.method == 'POST' and form.is_valid():
         familiar = form.save(commit=False)
@@ -71,6 +72,7 @@ def crear_familiares(request, persona_pep_id):
         'form': form,
         'persona_pep': persona_pep,
         'familiares': familiares,
+        'messageListado': messageListado,
     }
 
     return render(request, 'personasPep/crearFamiliares.html', context)

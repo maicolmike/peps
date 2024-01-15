@@ -3,6 +3,8 @@
 
 {% block content %}
 
+{% if user.is_superuser == 1 %} <!-- valido que el usuario que ingresa a esta ruta sea un administrador tipo= 1-->
+
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 
 
@@ -10,7 +12,11 @@
   {% include 'messages.html' %}
   <div class="row">
     <div class="col-sm-7">
+      {% if messageListado != 'Actualizar' %}
       <a href="{% url 'crear_pep' %}" class="btn btn-success" style="background-color:rgb(4,105,4);">Volver</a>
+      {% else %}
+      <a href="{% url 'listarAsociados' %}" class="btn btn-success" id="volverBtn" style="background-color:rgb(4,105,4);">Volver</a>
+      {% endif%}
     </div>
     <div class="col-sm-5">
       <h6"><strong>Fecha de registro como Pep:</strong></h6>
@@ -100,7 +106,11 @@
               </div>
               <div class="col">
                 <button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Añadir (+)</button>
+                {% if messageListado != 'Actualizar' %}
                 <a href="{% url 'crear_pep' %}" class="btn btn-success" style="background-color:rgba(105, 4, 4, 0.795);">Salir</a>
+                {% else %}
+                <a href="{% url 'crear_pep' %}" class="btn btn-success" style="background-color:rgba(105, 4, 4, 0.795);">Salir</a>
+                {% endif%}
               </div>
             </div>
             <table class="table table-borderless table-striped table-hover">
@@ -144,5 +154,11 @@
   </div>
   
 </div>
+
+{% else %}  <!-- aqui pongo el final del condicional para saber si el que accede es un administrador-->
+
+{% include 'accesoRestringido.html' %}    <!--  Dentro de este archivo configuro el mensaje a mostar -->
+
+{% endif %}  <!-- aqui pongo el final del condicional para saber si el que accede es un administrador-->
 
 {% endblock %}
