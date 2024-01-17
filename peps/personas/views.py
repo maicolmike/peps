@@ -66,6 +66,9 @@ def crear_familiares(request, persona_pep_id):
         familiar.persona_pep = persona_pep
         familiar.save()
         messages.success(request, 'Familiar ha sido creado con éxito')
+        
+        # Limpiar el formulario
+        form = CrearFamiliaresForm()
 
     context = {
         'title': "Crear Familiares",
