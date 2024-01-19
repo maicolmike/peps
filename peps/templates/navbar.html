@@ -35,7 +35,7 @@
     {% endif %}
     </ul>
     <!-- Tomar usuario actual-->
-    <span class="navbar-light">
+    <span>  <!-- <span class="navbar-light">-->
      <!-- <strong>{{ user.username }} </strong> ( {{ user.is_superuser }} ) -->
      {% if user.is_superuser == 1 %}  
      <h5 style="color:white">{{ user.username }} ( Administrador )</h5>
