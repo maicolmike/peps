@@ -66,18 +66,16 @@
 <br>
     
 <div class="container">
-    <div class="card">
-        <div class="card-header">
-        <h3 class="card-title">Listado de asociados pep</h3>
-        </div>
+    <div class="card shadow table-responsive">
         
-        <div class="card-body">
-        <table id="example1" class="table table-bordered table-striped">
-        <thead>
+        <div class="card-body table-responsive">
+            <h4 style="text-align: center;"><b>Listado de asociados pep</b></h4>
+        <table id="example1" class="table table-bordered table-hover">
+        <thead class="table-secondary">
         <tr>
         <th class="sorting sorting_asc">Identificacion</th>
         <th>Nombre y apellidos</th>
-        <th>Ver nucleo familiar</th>
+        <th style="text-align: center;">Ver nucleo familiar</th>
         </tr>
         </thead>
         <tbody>
@@ -95,11 +93,11 @@
         {% endfor %}
         <!-- Final for -->
         </tbody>
-        <tfoot>
+        <tfoot class="table-secondary">
         <tr>
         <th>Identificacion</th>
         <th>Nombre y apellidos</th>
-        <th>Ver nucleo familiar</th>
+        <th style="text-align: center;">Ver nucleo familiar</th>
         </tr>
         </tfoot>
         </table>
