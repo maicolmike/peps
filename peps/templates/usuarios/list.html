@@ -44,11 +44,11 @@
                       <td>Cliente</td>
                       {% endif %}
                       <td>{{ usuarios.date_joined }}</td> <!-- fecha y hora de creacion-->
-                      <td><a href="" class="btn btn-primary fa-solid fa-pen" id="btn-edit{{ usuarios.id }}" data-toggle="modal" data-target="#modal{{ usuarios.id }}"></a></td>
-                      <td><a href="" class="btn btn-success fa-solid fa-lock" id="btn-cambiar{{ usuarios.id }}" data-toggle="modal" data-target="#modal2{{ usuarios.id }}"></a></td>
-                      <td><a href="" class="btn btn-danger fa-solid fa-trash" id="btn-eliminar{{ usuarios.id }}" data-toggle="modal" data-target="#modal3{{ usuarios.id }}"></a></td>
+                      <td><a href="" class="btn btn-info fa-solid fa-pen-to-square" id="btn-edit{{ usuarios.id }}" data-toggle="modal" data-target="#modal{{ usuarios.id }}"></a></td>
+                      <td><a href="" class="btn btn-success fa-solid fa-calendar-check" id="btn-cambiar{{ usuarios.id }}" data-toggle="modal" data-target="#modal2{{ usuarios.id }}"></a></td>
+                      <td><a href="" class="btn btn-danger fa-solid fa-trash-can" id="btn-eliminar{{ usuarios.id }}" data-toggle="modal" data-target="#modal3{{ usuarios.id }}"></a></td>
                      
-                  </tr>
+                  </tr><i class="fa-solid fa-right-to-bracket"></i>
 
                   {% include 'usuarios/modalEditar.html' %}
                   {% include 'usuarios/modalClave.html' %}
