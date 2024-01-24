@@ -18,7 +18,8 @@ def index(request):
 def login_view(request):
     form = LoginUser(request.POST or None)
     if request.user.is_authenticated:
-        return redirect('index')
+        #return redirect('index')
+        return render(request, 'index.html',{'title': "Index"})
     
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -33,7 +34,8 @@ def login_view(request):
             
             '''if request.GET.get('next'):
                 return HttpResponseRedirect(request.GET['next'])  '''
-            return redirect('index')
+            #return redirect('index')
+            return render(request, 'index.html',{'title': "Index"})
         else : 
             messages.error(request,'Usuario o contraseña incorrectos')
             
@@ -48,6 +50,7 @@ def logout_view(request):
     messages.error(request,'Sesion cerrada')
     #messages.success(request,'Sesion cerrada')
     return redirect('login')
+    #return render(request, 'usuarios/login.html',{'title': "Login",})
 
 @login_required(login_url='login')    
 def register(request):
