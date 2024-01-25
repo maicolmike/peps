@@ -13,7 +13,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin # vista basada en clases que no permita acceder a paginas donde no se ha logeado
 
 
-class PersonaPEPDetailView(DetailView):
+class PersonaPEPDetailView(LoginRequiredMixin,DetailView):
     model = PersonaPEP
     template_name = 'personasPep/personaPep_detalle.html'
     context_object_name = 'persona'
