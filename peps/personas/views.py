@@ -174,7 +174,7 @@ class PepListView(LoginRequiredMixin,ListView):
     template_name = 'personasPep/pepListado.html'
     queryset = PersonaPEP.objects.all().order_by('id')
     #print(queryset)
-    paginate_by = 7
+    paginate_by = None  # Elimina la paginación temporalmente
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
